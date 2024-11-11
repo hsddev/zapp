@@ -1,24 +1,72 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import emailjs from "@emailjs/browser";
+import toast from "react-hot-toast";
+
+interface FormData {
+    email: string;
+}
+
+const schema = yup
+    .object({
+        email: yup.string().required().email().label("Email"),
+    })
+    .required();
 
 export default function Home() {
-    const [email, setEmail] = useState("");
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm<FormData>({
+        resolver: yupResolver(schema),
+    });
+    const form = useRef<HTMLFormElement>(null);
+
+    const sendEmail = (data: FormData) => {
+        if (form.current) {
+            emailjs
+                .sendForm(
+                    "service_3fdprv5",
+                    "template_1c4nxvo",
+                    form.current,
+                    "1cRDzSpi_17W_G0xC"
+                )
+                .then(
+                    (result) => {
+                        toast("Subscribed successfully!", {
+                            position: "top-center",
+                        });
+                        reset();
+                        console.log(result);
+                    },
+                    (error) => {
+                        console.log(error);
+                        toast.error("Subscription failed.");
+                    }
+                );
+        } else {
+            console.error("Form reference is null");
+        }
+    };
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-center p-6 sm:p-10 bg-white">
             <div className="w-full max-w-md">
                 <div className="flex justify-center mb-4">
-                    {" "}
-                    {/* Reduced space */}
                     <Image
                         src="/logo.png"
                         alt="My Logo"
-                        width={300} // Adjusted width for smaller display
-                        height={400} // Adjusted height for smaller display
+                        width={300}
+                        height={400}
                         className="w-48 h-auto sm:w-64 md:w-80 lg:w-96"
                     />
                 </div>
@@ -29,21 +77,25 @@ export default function Home() {
                     We're working hard to bring you something amazing. Stay
                     tuned!
                 </p>
-                <form className="space-y-4">
-                    {" "}
-                    {/* Reduced space between form elements */}
-                    <div className="rounded-md shadow-sm -space-y-px">
+                <form
+                    ref={form}
+                    onSubmit={handleSubmit(sendEmail)}
+                    className="space-y-4"
+                >
+                    <div className="rounded-md shadow-sm">
                         <Input
                             id="email-address"
-                            name="email"
+                            {...register("email")}
                             type="email"
-                            autoComplete="email"
                             required
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             placeholder="Email address"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
                         />
+                        {errors.email && (
+                            <p className="text-red-500 text-xs mt-1">
+                                {errors.email.message}
+                            </p>
+                        )}
                     </div>
                     <div>
                         <Button
