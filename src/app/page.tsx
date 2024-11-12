@@ -135,6 +135,7 @@ export default function Home() {
                                     id="parent-name"
                                     {...register("parentName")}
                                     type="text"
+                                    name="parentName"
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="Parent's Name"
                                 />
@@ -149,6 +150,7 @@ export default function Home() {
                                     id="child-name"
                                     {...register("childName")}
                                     type="text"
+                                    name="childName"
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="Child's Name"
                                 />
@@ -163,6 +165,7 @@ export default function Home() {
                                     id="child-age"
                                     {...register("childAge")}
                                     type="text"
+                                    name="childAge"
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="Child's Age"
                                 />
@@ -177,6 +180,7 @@ export default function Home() {
                                     id="email-address"
                                     {...register("email")}
                                     type="email"
+                                    name="email"
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="Email address"
                                 />
