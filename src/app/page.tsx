@@ -99,7 +99,7 @@ export default function Home() {
                     />
                 </div>
                 <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-2">
-                    Exciting News! ZappSquad is Launching in January 2025
+                    Exciting News! ZappSquad is Launching in 2025
                 </h2>
                 <p className="text-center text-sm text-gray-600 mb-5">
                     Sign up now to receive a special discount code and an
