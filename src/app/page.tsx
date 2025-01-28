@@ -54,7 +54,7 @@ export default function Home() {
         if (form.current) {
             emailjs
                 .sendForm(
-                    "service_3fdprv5",
+                    "service_ilcwenp",
                     "template_1c4nxvo",
                     form.current,
                     "1cRDzSpi_17W_G0xC"
